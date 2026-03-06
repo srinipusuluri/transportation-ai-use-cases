@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Transportation & Logistics - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #f59e0b;
+            --accent-color: #10b981;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --transport-blue: #3b82f6;
+            --logistics-orange: #f97316;
+            --route-green: #22c55e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--transport-blue), var(--logistics-orange), var(--route-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--transport-blue), var(--logistics-orange));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--transport-blue), var(--logistics-orange), var(--route-green));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(59, 130, 246, 0.2); color: var(--transport-blue); }
+        .icon.gen { background: rgba(249, 115, 22, 0.2); color: var(--logistics-orange); }
+        .icon.ag { background: rgba(34, 197, 94, 0.2); color: var(--route-green); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--transport-blue), var(--logistics-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--transport-blue);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(249, 115, 22, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--transport-blue);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--transport-blue);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .transport-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .logistics-badge {
+            background: rgba(249, 115, 22, 0.2);
+            color: #f97316;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .route-badge {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚚 AI in Transportation & Logistics</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Supply Chain & Mobility</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for demand forecasting, route optimization, and supply chain efficiency
+            </p>
+
+            <div class="card-grid">
+                <!-- Demand Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">📊</div>
+                        <div>
+                            <div class="card-title">Demand Forecasting</div>
+                            <div class="card-subtitle">Supply Chain Planning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict future demand for goods and services across different regions and time periods to optimize inventory and transportation planning.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Time Series Analysis</span>
+                            <span class="tech-tag">ARIMA Models</span>
+                            <span class="tech-tag">Prophet</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">External Data Integration</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Historical Sales → Seasonal Analysis → Trend Detection → Demand Prediction → Inventory Planning</div>
+                            <div class="architecture-item">Market Data → Economic Indicators → Weather Patterns → Event Impact → Forecast Adjustment</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical sales and shipment data</li>
+                                <li>Seasonal patterns and trends</li>
+                                <li>Market and economic indicators</li>
+                                <li>Weather and climate data</li>
+                                <li>Competitor analysis and market share</li>
+                                <li>Promotional calendar and events</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Forecast Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-40%</div>
+                                <div class="metric-label">Inventory Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">15-30%</div>
+                                <div class="metric-label">Stockout Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Route Optimization -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🛣️</div>
+                        <div>
+                            <div class="card-title">Route Optimization</div>
+                            <div class="card-subtitle">Transportation Efficiency</div>
+                            <span class="route-badge">Optimization</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize delivery routes to minimize fuel consumption, reduce delivery times, and improve overall transportation efficiency.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Vehicle Routing Problem (VRP)</span>
+                            <span class="tech-tag">Genetic Algorithms</span>
+                            <span class="tech-tag">Graph Theory</span>
+                            <span class="tech-tag">Real-time Traffic Analysis</span>
+                            <span class="tech-tag">Geospatial Analytics</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Delivery Points → Constraint Analysis → Route Calculation → Optimization → Execution</div>
+                            <div class="architecture-item">Traffic Data → Weather Conditions → Vehicle Capacity → Time Windows → Dynamic Routing</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Delivery location coordinates and constraints</li>
+                                <li>Real-time traffic and road condition data</li>
+                                <li>Vehicle capacity and specifications</li>
+                                <li>Delivery time windows and priorities</li>
+                                <li>Driver schedules and regulations</li>
+                                <li>Historical route performance data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">15-30%</div>
+                                <div class="metric-label">Fuel Savings</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-40%</div>
+                                <div class="metric-label">Delivery Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-50%</div>
+                                <div class="metric-label">Route Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fleet Predictive Maintenance -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🔧</div>
+                        <div>
+                            <div class="card-title">Fleet Predictive Maintenance</div>
+                            <div class="card-subtitle">Vehicle Health Monitoring</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict vehicle maintenance needs before failures occur to minimize downtime and reduce maintenance costs.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">IoT Sensor Analytics</span>
+                            <span class="tech-tag">Anomaly Detection</span>
+                            <span class="tech-tag">Time Series Forecasting</span>
+                            <span class="tech-tag">Condition Monitoring</span>
+                            <span class="tech-tag">Maintenance Scheduling</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Sensor Data → Health Monitoring → Failure Prediction → Maintenance Scheduling → Cost Optimization</div>
+                            <div class="architecture-item">Vehicle Telemetry → Pattern Analysis → Component Wear → Preventive Actions → Performance Tracking</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Vehicle telematics and sensor data</li>
+                                <li>Engine performance metrics</li>
+                                <li>Maintenance history and repair records</li>
+                                <li>Driving patterns and conditions</li>
+                                <li>Environmental factors and usage patterns</li>
+                                <li>Component lifespan and failure data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Maintenance Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Breakdown Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Vehicle Uptime</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETA Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⏱️</div>
+                        <div>
+                            <div class="card-title">ETA Prediction</div>
+                            <div class="card-subtitle">Delivery Time Forecasting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Accurately predict delivery times to improve customer experience and optimize last-mile delivery operations.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Real-time Traffic Analysis</span>
+                            <span class="tech-tag">Historical Performance</span>
+                            <span class="tech-tag">Weather Impact Modeling</span>
+                            <span class="tech-tag">Dynamic Updates</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Route Planning → Traffic Analysis → Weather Impact → Driver Behavior → ETA Calculation</div>
+                            <div class="architecture-item">Real-time Updates → Customer Notification → Route Adjustment → Delivery Tracking</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical delivery time data</li>
+                                <li>Real-time traffic conditions</li>
+                                <li>Weather forecasts and conditions</li>
+                                <li>Driver performance metrics</li>
+                                <li>Delivery location characteristics</li>
+                                <li>Time-of-day and day-of-week patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Prediction Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">15-25%</div>
+                                <div class="metric-label">Delivery Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fuel Consumption Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⛽</div>
+                        <div>
+                            <div class="card-title">Fuel Consumption Modeling</div>
+                            <div class="card-subtitle">Efficiency Optimization</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Model and optimize fuel consumption across the fleet to reduce operational costs and environmental impact.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Regression Analysis</span>
+                            <span class="tech-tag">Driver Behavior Analysis</span>
+                            <span class="tech-tag">Route Optimization</span>
+                            <span class="tech-tag">Vehicle Performance</span>
+                            <span class="tech-tag">Environmental Factors</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Vehicle Data → Driving Patterns → Route Analysis → Fuel Modeling → Optimization</div>
+                            <div class="architecture-item">Load Weight → Weather Conditions → Traffic Patterns → Consumption Prediction → Savings</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Vehicle fuel consumption data</li>
+                                <li>Driver behavior and habits</li>
+                                <li>Route characteristics and elevation</li>
+                                <li>Load weight and distribution</li>
+                                <li>Weather and environmental conditions</li>
+                                <li>Traffic patterns and congestion data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">10-20%</div>
+                                <div class="metric-label">Fuel Savings</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">15-25%</div>
+                                <div class="metric-label">Emissions Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">$500-2000</div>
+                                <div class="metric-label">Annual Savings/Vehicle</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Driver Risk Scoring -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">👤</div>
+                        <div>
+                            <div class="card-title">Driver Risk Scoring</div>
+                            <div class="card-subtitle">Safety Assessment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Assess and predict driver risk levels to improve safety, reduce accidents, and optimize insurance costs.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Behavioral Analytics</span>
+                            <span class="tech-tag">Telematics Data</span>
+                            <span class="tech-tag">Risk Assessment Models</span>
+                            <span class="tech-tag">Safety Scoring</span>
+                            <span class="tech-tag">Training Recommendations</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Driving Behavior → Risk Analysis → Safety Scoring → Training Needs → Performance Improvement</div>
+                            <div class="architecture-item">Accident History → Compliance Tracking → Risk Prediction → Intervention Planning → Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Driver telematics and behavior data</li>
+                                <li>Accident and incident history</li>
+                                <li>Compliance and violation records</li>
+                                <li>Training completion and performance</li>
+                                <li>Hours of service compliance</li>
+                                <li>Route difficulty and conditions</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Accident Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-40%</div>
+                                <div class="metric-label">Insurance Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Safety Compliance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content generation, documentation automation, and communication in transportation and logistics
+            </p>
+
+            <div class="card-grid">
+                <!-- Automated Shipment Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📦</div>
+                        <div>
+                            <div class="card-title">Automated Shipment Reports</div>
+                            <div class="card-subtitle">Logistics Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically generate comprehensive shipment reports including tracking, status updates, and performance metrics.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Data Integration</span>
+                            <span class="tech-tag">Template-based Generation</span>
+                            <span class="tech-tag">Real-time Updates</span>
+                            <span class="tech-tag">Performance Analytics</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Shipment Data → Status Tracking → Performance Metrics → Report Generation → Distribution</div>
+                            <div class="architecture-item">Customer Requirements → Customization → Format Selection → Content Generation → Delivery</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Real-time shipment tracking data</li>
+                                <li>Delivery performance metrics</li>
+                                <li>Customer-specific requirements</li>
+                                <li>Historical shipment patterns</li>
+                                <li>Exception and delay information</li>
+                                <li>Customs and compliance data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Report Generation Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">95-99%</div>
+                                <div class="metric-label">Information Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">Real-time</div>
+                                <div class="metric-label">Updates</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Incident Summaries -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">⚠️</div>
+                        <div>
+                            <div class="card-title">Incident Summaries</div>
+                            <div class="card-subtitle">Event Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate detailed incident reports for accidents, delays, and other transportation disruptions.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Incident Analysis</span>
+                            <span class="tech-tag">Root Cause Analysis</span>
+                            <span class="tech-tag">Impact Assessment</span>
+                            <span class="tech-tag">Prevention Recommendations</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Incident Data → Timeline Reconstruction → Cause Analysis → Impact Assessment → Report Generation</div>
+                            <div class="architecture-item">Stakeholder Input → Evidence Collection → Compliance Review → Summary Creation → Distribution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Incident reports and witness statements</li>
+                                <li>GPS and telematics data</li>
+                                <li>Weather and road condition data</li>
+                                <li>Vehicle inspection reports</li>
+                                <li>Regulatory compliance requirements</li>
+                                <li>Historical incident patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Report Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Investigation Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Prevention Effectiveness</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customs Documentation Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📋</div>
+                        <div>
+                            <div class="card-title">Customs Documentation</div>
+                            <div class="card-subtitle">International Trade Compliance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically generate accurate customs documentation and trade compliance paperwork for international shipments.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Trade Compliance</span>
+                            <span class="tech-tag">Regulatory Knowledge</span>
+                            <span class="tech-tag">Document Automation</span>
+                            <span class="tech-tag">Multi-language Support</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Shipment Details → Trade Regulations → Document Generation → Compliance Check → Submission</div>
+                            <div class="architecture-item">Product Classification → Tariff Codes → Value Declaration → Certificate Requirements → Processing</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>International trade regulations</li>
+                                <li>Customs tariff classifications</li>
+                                <li>Product descriptions and specifications</li>
+                                <li>Country-specific requirements</li>
+                                <li>Trade agreement provisions</li>
+                                <li>Historical clearance data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Processing Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Clearance Success</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Notification Messaging -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">💬</div>
+                        <div>
+                            <div class="card-title">Customer Notification</div>
+                            <div class="card-subtitle">Delivery Communication</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate personalized customer notifications for shipment updates, delays, and delivery confirmations.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Customer Segmentation</span>
+                            <span class="tech-tag">Personalization</span>
+                            <span class="tech-tag">Multi-channel Delivery</span>
+                            <span class="tech-tag">Real-time Updates</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Shipment Status → Customer Profile → Message Generation → Channel Selection → Delivery</div>
+                            <div class="architecture-item">Delay Information → Impact Assessment → Communication Strategy → Customer Response → Follow-up</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer communication preferences</li>
+                                <li>Shipment tracking data</li>
+                                <li>Delivery time windows</li>
+                                <li>Customer history and behavior</li>
+                                <li>Preferred communication channels</li>
+                                <li>Language and localization requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Message Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">Real-time</div>
+                                <div class="metric-label">Delivery</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operations Dashboard Narratives -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📊</div>
+                        <div>
+                            <div class="card-title">Operations Dashboard</div>
+                            <div class="card-subtitle">Performance Analytics</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate narrative explanations and insights for logistics operations dashboards and performance reports.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Data Visualization</span>
+                            <span class="tech-tag">Performance Analytics</span>
+                            <span class="tech-tag">Trend Analysis</span>
+                            <span class="tech-tag">Actionable Insights</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Performance Data → Trend Analysis → Insight Generation → Narrative Creation → Dashboard Integration</div>
+                            <div class="architecture-item">KPI Monitoring → Anomaly Detection → Explanation Generation → Recommendation Engine → Reporting</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Real-time operational metrics</li>
+                                <li>Historical performance data</li>
+                                <li>KPI definitions and targets</li>
+                                <li>Industry benchmarks</li>
+                                <li>Operational constraints</li>
+                                <li>Business context and goals</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-90%</div>
+                                <div class="metric-label">Insight Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Decision Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">Real-time</div>
+                                <div class="metric-label">Analytics</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Manual Creation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📚</div>
+                        <div>
+                            <div class="card-title">Training Manual Creation</div>
+                            <div class="card-subtitle">Employee Education</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive training materials for drivers, warehouse staff, and logistics personnel.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Instructional Design</span>
+                            <span class="tech-tag">Interactive Content</span>
+                            <span class="tech-tag">Compliance Training</span>
+                            <span class="tech-tag">Assessment Generation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Training Requirements → Content Generation → Interactive Elements → Assessment Creation → Delivery</div>
+                            <div class="architecture-item">Compliance Standards → Safety Procedures → Operational Guidelines → Best Practices → Certification</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Company policies and procedures</li>
+                                <li>Industry regulations and standards</li>
+                                <li>Safety protocols and guidelines</li>
+                                <li>Equipment operation manuals</li>
+                                <li>Best practices documentation</li>
+                                <li>Assessment and certification requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Training Effectiveness</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Development Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Compliance Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex logistics workflows and transportation management
+            </p>
+
+            <div class="card-grid">
+                <!-- Autonomous Route Orchestration -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🛣️</div>
+                        <div>
+                            <div class="card-title">Autonomous Route Orchestration</div>
+                            <div class="card-subtitle">Intelligent Transportation Management</div>
+                            <span class="route-badge">Autonomous</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Autonomously manage and optimize transportation routes in real-time based on changing conditions and constraints.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Multi-Agent Systems</span>
+                            <span class="tech-tag">Real-time Optimization</span>
+                            <span class="tech-tag">Traffic Management</span>
+                            <span class="tech-tag">Weather Adaptation</span>
+                            <span class="tech-tag">Dynamic Re-routing</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Route Planning → Real-time Monitoring → Condition Analysis → Route Adjustment → Execution</div>
+                            <div class="architecture-item">Traffic Data → Weather Updates → Vehicle Status → Customer Requirements → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Real-time traffic and road conditions</li>
+                                <li>Weather forecasts and alerts</li>
+                                <li>Vehicle location and status</li>
+                                <li>Delivery time windows</li>
+                                <li>Driver availability and regulations</li>
+                                <li>Customer preferences and constraints</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Route Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Delivery Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">15-25%</div>
+                                <div class="metric-label">Fuel Consumption</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fleet Maintenance Scheduling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔧</div>
+                        <div>
+                            <div class="card-title">Fleet Maintenance Scheduling</div>
+                            <div class="card-subtitle">Predictive Maintenance Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically schedule and coordinate fleet maintenance activities to minimize downtime and optimize vehicle availability.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Predictive Analytics</span>
+                            <span class="tech-tag">Maintenance Scheduling</span>
+                            <span class="tech-tag">Resource Allocation</span>
+                            <span class="tech-tag">Downtime Optimization</span>
+                            <span class="tech-tag">Cost Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Vehicle Health → Maintenance Prediction → Schedule Optimization → Resource Allocation → Execution</div>
+                            <div class="architecture-item">Service History → Parts Inventory → Technician Availability → Cost Analysis → Performance Tracking</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Vehicle health monitoring data</li>
+                                <li>Maintenance history and patterns</li>
+                                <li>Service center availability</li>
+                                <li>Parts inventory and lead times</li>
+                                <li>Technician schedules and skills</li>
+                                <li>Operational requirements and priorities</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Unplanned Downtime</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Maintenance Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Vehicle Availability</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-carrier Load Allocation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🚛</div>
+                        <div>
+                            <div class="card-title">Multi-carrier Load Allocation</div>
+                            <div class="card-subtitle">Carrier Optimization</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize load allocation across multiple carriers to minimize costs and maximize efficiency.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Optimization Algorithms</span>
+                            <span class="tech-tag">Carrier Management</span>
+                            <span class="tech-tag">Cost Analysis</span>
+                            <span class="tech-tag">Capacity Planning</span>
+                            <span class="tech-tag">Contract Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Shipment Requirements → Carrier Selection → Load Optimization → Cost Analysis → Allocation</div>
+                            <div class="architecture-item">Contract Terms → Capacity Availability → Service Levels → Performance Tracking → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Carrier capacity and availability</li>
+                                <li>Contract rates and terms</li>
+                                <li>Service level agreements</li>
+                                <li>Shipment characteristics and requirements</li>
+                                <li>Historical performance data</li>
+                                <li>Market rates and trends</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">15-25%</div>
+                                <div class="metric-label">Transportation Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Load Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-35%</div>
+                                <div class="metric-label">Carrier Performance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disruption Response Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">⚠️</div>
+                        <div>
+                            <div class="card-title">Disruption Response</div>
+                            <div class="card-subtitle">Crisis Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically respond to transportation disruptions and implement contingency plans to minimize impact.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Event Detection</span>
+                            <span class="tech-tag">Crisis Management</span>
+                            <span class="tech-tag">Contingency Planning</span>
+                            <span class="tech-tag">Stakeholder Communication</span>
+                            <span class="tech-tag">Recovery Coordination</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Disruption Detection → Impact Assessment → Response Activation → Alternative Planning → Execution</div>
+                            <div class="architecture-item">Stakeholder Notification → Resource Mobilization → Recovery Tracking → Lessons Learned → Prevention</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Disruption monitoring systems</li>
+                                <li>Contingency plans and procedures</li>
+                                <li>Alternative resource availability</li>
+                                <li>Stakeholder communication protocols</li>
+                                <li>Recovery time objectives</li>
+                                <li>Historical disruption patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Response Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Disruption Impact</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Recovery Success</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warehouse Coordination Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🏭</div>
+                        <div>
+                            <div class="card-title">Warehouse Coordination</div>
+                            <div class="card-subtitle">Operations Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Coordinate warehouse operations including receiving, storage, picking, and shipping to optimize throughput and efficiency.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Warehouse Management</span>
+                            <span class="tech-tag">Inventory Optimization</span>
+                            <span class="tech-tag">Workflow Coordination</span>
+                            <span class="tech-tag">Resource Allocation</span>
+                            <span class="tech-tag">Performance Monitoring</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Receiving → Storage Allocation → Picking Optimization → Packing → Shipping Coordination</div>
+                            <div class="architecture-item">Inventory Levels → Order Priorities → Resource Availability → Performance Tracking → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Inventory management systems</li>
+                                <li>Order processing data</li>
+                                <li>Warehouse layout and capacity</li>
+                                <li>Staffing levels and skills</li>
+                                <li>Equipment availability and status</li>
+                                <li>Performance metrics and KPIs</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Throughput</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Order Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-35%</div>
+                                <div class="metric-label">Labor Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End-to-end Shipment Tracking -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📦</div>
+                        <div>
+                            <div class="card-title">End-to-end Shipment Tracking</div>
+                            <div class="card-subtitle">Supply Chain Visibility</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Provide comprehensive tracking and monitoring of shipments throughout the entire supply chain journey.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">IoT Integration</span>
+                            <span class="tech-tag">Real-time Monitoring</span>
+                            <span class="tech-tag">Predictive Analytics</span>
+                            <span class="tech-tag">Exception Management</span>
+                            <span class="tech-tag">Customer Portal</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Origin Tracking → Transit Monitoring → Destination Updates → Exception Handling → Delivery Confirmation</div>
+                            <div class="architecture-item">Sensor Data → Location Updates → Status Changes → Customer Notifications → Performance Analytics</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>GPS and location tracking systems</li>
+                                <li>IoT sensors for condition monitoring</li>
+                                <li>Carrier integration systems</li>
+                                <li>Customer communication platforms</li>
+                                <li>Exception and delay management</li>
+                                <li>Historical performance data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">95-99%</div>
+                                <div class="metric-label">Tracking Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Exception Resolution</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">Real-time</div>
+                                <div class="metric-label">Updates</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of transportation and logistics</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of data security, regulatory compliance, and operational integration
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
